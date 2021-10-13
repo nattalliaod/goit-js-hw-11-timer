@@ -1,14 +1,21 @@
-import refs from './refs'
+// import refs from './refs'
 
 class CountdownTimer {
     constructor({ targetDate, selector }) {
-        const { daysC, hoursC, minsC, secondsC } = refs
-        this.selector = selector;
-        this.refs = { daysC, hoursC, minsC, secondsC }
-        this.targetDate = targetDate;
+      this.selector = selector
+      this.targetDate = targetDate
+      this.refs = this._getRefs(selector)
     
-        this.start()
-    }
+      this.start()
+  }
+  _getRefs(root) {
+    const refs = {}
+     refs.daysC = document.querySelector(`${root} [data-value="days"]`),
+     refs.hoursC = document.querySelector(`${root} [data-value="hours"]`),
+     refs.minsC = document.querySelector(`${root} [data-value="mins"]`),
+     refs.secondsC = document.querySelector(`${root} [data-value="secs"]`)
+       return refs
+  }
 
     start() {
     setInterval(() => {
