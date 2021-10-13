@@ -1,14 +1,13 @@
 // import refs from './refs'
 
 class CountdownTimer {
-    constructor({ targetDate, selector }) {
-      this.selector = selector
+  constructor({ targetDate, selector }) {
+      this._refs = this._getRefs(selector)
       this.targetDate = targetDate
-      this.refs = this._getRefs(selector)
-    
+   
       this.start()
   }
-  _getRefs(root) {
+    _getRefs(root) {
     const refs = {}
      refs.daysC = document.querySelector(`${root} [data-value="days"]`),
      refs.hoursC = document.querySelector(`${root} [data-value="hours"]`),
@@ -40,17 +39,16 @@ class CountdownTimer {
   }
 
     insertValues({ days, hours, mins, seconds }) {
-      this.refs.daysC.innerHTML = days;
-      this.refs.hoursC.innerHTML = hours;
-      this.refs.minsC.innerHTML = mins;
-      this.refs.secondsC.innerHTML = seconds;
+      this._refs.daysC.innerHTML = days;
+      this._refs.hoursC.innerHTML = hours;
+      this._refs.minsC.innerHTML = mins;
+      this._refs.secondsC.innerHTML = seconds;
 }
 }
 
-const timer = new CountdownTimer({
-
-    selector: '#timer-1',
-    targetDate: new Date('Jan 1, 2022'),
+new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('Jan 1, 2022'),
 });
 
 
